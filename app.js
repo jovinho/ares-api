@@ -1,23 +1,23 @@
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
-var app = express();
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const app = express();
 app.use(logger('dev'));
 app.use(bodyParser.json());
 
-var index = require('./routes/network');
+const network = require('./network/network-routes');
 
-var db = require('./db.js');
+const db = require('./db.js');
 
 //Middleware that will create connection to database
 app.use(db.createConnectionMiddleware);
 
-app.use('/', index);
+app.use('/network', network);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });

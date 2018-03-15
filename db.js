@@ -11,7 +11,6 @@ const rethinkdb = {
  * Create a RethinkDB connection, and save it in req._rdbConn
  */
 function createConnectionMiddleware(req, res, next) {
-  console.log('TRYING TO CREATE CONNECTION');
   r
     .connect(rethinkdb)
     .then(function(conn) {
@@ -37,6 +36,5 @@ function closeConnectionMiddleware(req, res, next) {
 
 module.exports = {
   createConnectionMiddleware: createConnectionMiddleware,
-  closeConnectionMiddleware: closeConnectionMiddleware,
-  createTables: createTables
+  closeConnectionMiddleware: closeConnectionMiddleware
 };
