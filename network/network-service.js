@@ -31,7 +31,20 @@ const getNetwork = function(dbConnection, networkId) {
   });
 };
 
+const createNetwork = function(dbConnection, network) {
+  return new Promise(function(resolve, reject) {
+    r
+      .table('networks')
+      .insert(network)
+      .run(dbConnection, function(err, result) {
+        defaultErrorTreatment(err, reject);
+        resolve(result);
+      });
+  });
+};
+
 module.exports = {
   listNetworks: listNetworks,
-  getNetwork: getNetwork
+  getNetwork: getNetwork,
+  createNetwork: createNetwork
 };

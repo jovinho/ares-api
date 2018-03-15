@@ -9,7 +9,20 @@ const getNetworks = function(req, res) {
       res.send(networks);
     })
     .catch(function(err) {
-      throw err;
+      res.status(500).json({ message: 'Um erro aconteceu' });
+    });
+};
+
+const createNetwork = function(req, res) {
+  const dbConnection = req._rdbConn;
+  const network = req.body;
+
+  const networkPromise = NetworkService.createNetwork(dbConnection, network)
+    .then(function(result) {
+      res.send(result);
+    })
+    .catch(function(err) {
+      res.send(422);
     });
 };
 
@@ -23,7 +36,7 @@ const getNetworkById = function(req, res) {
       if (network) {
         res.send(network);
       } else {
-        res.sendStatus(404);
+        res.status(404).json({ message: 'Recurso não encontrado' });
       }
     })
     .catch(function(err) {
@@ -33,5 +46,6 @@ const getNetworkById = function(req, res) {
 
 module.exports = {
   getNetworks: getNetworks,
-  getNetworkById: getNetworkById
+  getNetworkById: getNetworkById,
+  createNetwork: createNetwork
 };
