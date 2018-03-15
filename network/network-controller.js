@@ -18,8 +18,13 @@ const createNetwork = function(req, res) {
   const network = req.body;
 
   const networkPromise = NetworkService.createNetwork(dbConnection, network)
-    .then(function(result) {
-      res.send(result);
+    .then(function(networkId) {
+      res
+        .status(201)
+        .location(networkId)
+        .json({
+          networkId: networkId
+        });
     })
     .catch(function(err) {
       res.send(422);

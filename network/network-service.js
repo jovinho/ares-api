@@ -38,6 +38,11 @@ const createNetwork = function(dbConnection, network) {
       .insert(network)
       .run(dbConnection, function(err, result) {
         defaultErrorTreatment(err, reject);
+
+        if (result.inserted === 1) {
+          resolve(result.generated_keys[0]);
+        }
+
         resolve(result);
       });
   });
