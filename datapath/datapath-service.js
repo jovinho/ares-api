@@ -21,17 +21,20 @@ const listDatapaths = function(dbConnection, networkId) {
   });
 };
 
-const getIed = function(dbConnection, networkId, componentId) {
+const getDatapathById = function(dbConnection, networkId, datapathId) {
   return new Promise(function(resolve, reject) {
-    r.table('ieds')
-      .get(componentId)
-      .run(dbConnection, function(err, network) {
-        defaultErrorTreatment(err, reject);
-        resolve(network);
+    r.table('datapaths')
+      .getAll(datapathId, { index: 'datapathId' })
+      .run(dbConnection, function(err, cursor) {
+        cursor.toArray(function(err, result) {
+          defaultErrorTreatment(err, reject);
+          resolve(result[0] || {});
+        });
       });
   });
 };
 
 module.exports = {
-  listDatapaths: listDatapaths
+  listDatapaths: listDatapaths,
+  getDatapathById: getDatapathById
 };

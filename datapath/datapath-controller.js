@@ -3,9 +3,9 @@ const DatapathService = require('./datapath-service');
 const getDatapaths = function(req, res) {
   const dbConnection = req._rdbConn;
   const networkId = req.params.networkId;
-  const dapathsPromise = DatapathService.listDatapaths(dbConnection, networkId);
+  const datapathsPromise = DatapathService.listDatapaths(dbConnection, networkId);
 
-  dapathsPromise
+  datapathsPromise
     .then(function(datapaths) {
       res.send(datapaths);
     })
@@ -14,26 +14,26 @@ const getDatapaths = function(req, res) {
     });
 };
 
-const getIedById = function(req, res) {
+const getDatapathById = function(req, res) {
   const dbConnection = req._rdbConn;
   const networkId = req.params.networkId;
-  const componentId = req.params.id;
-  const iedsPromise = IedService.getIedById(dbConnection, networkId, id);
+  const id = req.params.id;
+  const datapathPromise = DatapathService.getDatapathById(dbConnection, networkId, id);
 
-  iedsPromise
-    .then(function(ied) {
-      if (ied) {
-        res.send(ied);
+  datapathPromise
+    .then(function(datapath) {
+      if (datapath) {
+        res.send(datapath);
       } else {
         res.status(404).json({ message: 'Recurso não encontrado' });
       }
     })
     .catch(function(err) {
-      res.send(404);
+      res.send(404).json({ message: err });
     });
 };
 
 module.exports = {
   getDatapaths: getDatapaths,
-  getIedById: getIedById
+  getDatapathById: getDatapathById
 };
