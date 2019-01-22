@@ -7,6 +7,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 
 const network = require('./network/network-routes');
+const components = require('./component/component-routes');
 
 const db = require('./db.js');
 
@@ -14,6 +15,7 @@ const db = require('./db.js');
 app.use(db.createConnectionMiddleware);
 
 app.use('/network', network);
+app.use(components);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -30,7 +32,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.send('error');
+  res.send({ error: 'something went wrong' });
 });
 
 //Middleware that will close connection to databse
