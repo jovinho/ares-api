@@ -1,14 +1,13 @@
-const IedService = require('./datapath-service');
+const DatapathService = require('./datapath-service');
 
 const getDatapaths = function(req, res) {
   const dbConnection = req._rdbConn;
   const networkId = req.params.networkId;
-  console.log('LIST IED');
-  const iedsPromise = IedService.listIeds(dbConnection, networkId);
+  const dapathsPromise = DatapathService.listDatapaths(dbConnection, networkId);
 
-  iedsPromise
-    .then(function(ieds) {
-      res.send(ieds);
+  dapathsPromise
+    .then(function(datapaths) {
+      res.send(datapaths);
     })
     .catch(function(err) {
       res.status(500).json({ message: 'Um erro aconteceu' });

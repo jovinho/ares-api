@@ -7,7 +7,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 
 const network = require('./network/network-routes');
-const components = require('./component/component-routes');
+const datapaths = require('./datapath/datapath-routes');
 
 const db = require('./db.js');
 
@@ -15,7 +15,7 @@ const db = require('./db.js');
 app.use(db.createConnectionMiddleware);
 
 app.use('/network', network);
-app.use(components);
+app.use(datapaths);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

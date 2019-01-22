@@ -7,9 +7,9 @@ const defaultErrorTreatment = (err, reject) => {
   }
 };
 
-const listIeds = function(dbConnection, networkId) {
+const listDatapaths = function(dbConnection, networkId) {
   return new Promise(function(resolve, reject) {
-    r.table('ieds')
+    r.table('datapaths')
       .getAll(networkId, { index: 'networkId' })
       .run(dbConnection, function(err, cursor) {
         defaultErrorTreatment(err, reject);
@@ -33,6 +33,5 @@ const getIed = function(dbConnection, networkId, componentId) {
 };
 
 module.exports = {
-  listIeds: listIeds,
-  getIed: getIed
+  listDatapaths: listDatapaths
 };
