@@ -6,7 +6,6 @@ const app = express();
 app.use(logger('dev'));
 app.use(bodyParser.json());
 
-const network = require('./network/network-routes');
 const datapaths = require('./datapath/datapath-routes');
 
 const db = require('./db.js');
@@ -14,7 +13,6 @@ const db = require('./db.js');
 //Middleware that will create connection to database
 app.use(db.createConnectionMiddleware);
 
-app.use('/network', network);
 app.use(datapaths);
 
 // catch 404 and forward to error handler

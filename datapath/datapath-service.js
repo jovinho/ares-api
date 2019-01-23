@@ -10,7 +10,7 @@ const defaultErrorTreatment = (err, reject) => {
 const listDatapaths = function(dbConnection, networkId) {
   return new Promise(function(resolve, reject) {
     r.table('datapaths')
-      .getAll(networkId, { index: 'networkId' })
+      .filter(true)
       .run(dbConnection, function(err, cursor) {
         defaultErrorTreatment(err, reject);
         cursor.toArray(function(err, result) {
