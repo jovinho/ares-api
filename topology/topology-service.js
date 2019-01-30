@@ -17,7 +17,7 @@ const getTopology = function(dbConnection) {
     .then(function(values) {
       return {
         datapaths: values[0],
-        interfaces: values[0]
+        interfaces: values[1]
       };
     })
     .catch(function(e) {
