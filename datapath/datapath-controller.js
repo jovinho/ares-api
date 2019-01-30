@@ -2,7 +2,6 @@ const DatapathService = require('./datapath-service');
 
 const getDatapaths = function(req, res) {
   const dbConnection = req._rdbConn;
-  const networkId = req.params.networkId;
   const datapathsPromise = DatapathService.getDatapaths(dbConnection);
 
   datapathsPromise
@@ -16,7 +15,6 @@ const getDatapaths = function(req, res) {
 
 const getDatapathById = function(req, res) {
   const dbConnection = req._rdbConn;
-  const networkId = req.params.networkId;
   const id = req.params.id;
   const datapathPromise = DatapathService.getDatapathById(dbConnection, id);
 

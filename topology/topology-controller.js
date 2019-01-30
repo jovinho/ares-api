@@ -2,7 +2,6 @@ const TopologyService = require('./topology-service');
 
 const getTopology = function(req, res) {
   const dbConnection = req._rdbConn;
-  const networkId = req.params.networkId;
   const topologyPromise = TopologyService.getTopology(dbConnection);
 
   topologyPromise
