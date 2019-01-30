@@ -7,7 +7,7 @@ const defaultErrorTreatment = (err, reject) => {
   }
 };
 
-const listDatapaths = function(dbConnection, networkId) {
+const getDatapaths = function(dbConnection) {
   return new Promise(function(resolve, reject) {
     r.table('datapaths')
       .filter(true)
@@ -21,7 +21,7 @@ const listDatapaths = function(dbConnection, networkId) {
   });
 };
 
-const getDatapathById = function(dbConnection, networkId, datapathId) {
+const getDatapathById = function(dbConnection, datapathId) {
   return new Promise(function(resolve, reject) {
     r.table('datapaths')
       .getAll(datapathId, { index: 'datapathId' })
@@ -35,6 +35,6 @@ const getDatapathById = function(dbConnection, networkId, datapathId) {
 };
 
 module.exports = {
-  listDatapaths: listDatapaths,
+  getDatapaths: getDatapaths,
   getDatapathById: getDatapathById
 };
