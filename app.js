@@ -8,6 +8,7 @@ app.use(bodyParser.json());
 
 const datapaths = require('./datapath/datapath-routes');
 const topology = require('./topology/topology-routes');
+const event = require('./event/event-routes');
 
 const db = require('./db.js');
 
@@ -17,6 +18,7 @@ app.use(db.createConnectionMiddleware);
 //ROUTING
 app.use(datapaths);
 app.use(topology);
+app.use(event);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

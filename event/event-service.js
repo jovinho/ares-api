@@ -35,6 +35,5 @@ const getEventById = function(dbConnection, datapathId) {
 };
 
 module.exports = {
-  getDatapaths: getDatapaths,
-  getDatapathById: getDatapathById
+  getEvents: getEvents
 };
