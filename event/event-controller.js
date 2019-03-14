@@ -1,4 +1,5 @@
 const EventService = require('./event-service');
+const ApiHooksLogic = require('../api-hooks/api-hooks-logic');
 
 const getEvents = function(req, res) {
   const dbConnection = req._rdbConn;
@@ -31,7 +32,24 @@ const getEventById = function(req, res) {
     });
 };
 
+const insertEvent = function(req, res) {
+  const dbConnection = req._rdbConn;
+  const event = req.body;
+
+  const eventPromise = EventService.insertEvent(dbConnection, event);
+
+  eventPromise
+    .then(function(result) {
+      ApiHooksLogic.activateHooks(dbConnection, 'EVENT', event);
+      res.send(201).json(result);
+    })
+    .catch(function(err) {
+      res.send(500).json(err);
+    });
+};
+
 module.exports = {
   getEvents: getEvents,
-  getEventById: getEventById
+  getEventById: getEventById,
+  insertEvent: insertEvent
 };
