@@ -10,8 +10,8 @@ const fs = require('fs');
 
 const cert = fs.readFileSync('./cacert');
 const rethinkdb = {
-  host: 'aws-us-east-1-portal.4.dblayer.com',
-  port: 32129,
+  host: 'aws-us-east-1-portal.27.dblayer.com',
+  port: 33174,
   password: '12345678',
   user: 'api',
   db: 'scada',

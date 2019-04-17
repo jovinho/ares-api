@@ -21,6 +21,19 @@ const getDatapaths = function(dbConnection) {
   });
 };
 
+const getDatapathByMac = function(dbConnection, mac) {
+  return new Promise(function(resolve, reject) {
+    r.table('datapaths')
+      .getAll(mac, { index: 'mac' })
+      .run(dbConnection, function(err, cursor) {
+        cursor.toArray(function(err, result) {
+          defaultErrorTreatment(err, reject);
+          resolve(result[0] || null);
+        });
+      });
+  });
+};
+
 const getDatapathById = function(dbConnection, datapathId) {
   return new Promise(function(resolve, reject) {
     r.table('datapaths')
@@ -28,7 +41,7 @@ const getDatapathById = function(dbConnection, datapathId) {
       .run(dbConnection, function(err, cursor) {
         cursor.toArray(function(err, result) {
           defaultErrorTreatment(err, reject);
-          resolve(result[0] || {});
+          resolve(result[0] || null);
         });
       });
   });
@@ -36,5 +49,6 @@ const getDatapathById = function(dbConnection, datapathId) {
 
 module.exports = {
   getDatapaths: getDatapaths,
+  getDatapathByMac: getDatapathByMac,
   getDatapathById: getDatapathById
 };
