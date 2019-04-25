@@ -10,6 +10,7 @@ const datapaths = require('./datapath/datapath-routes');
 const topology = require('./topology/topology-routes');
 const event = require('./event/event-routes');
 const discovery = require('./discovery/discovery-routes');
+const provisioning = require('./provisioning/provisioning-routes');
 const hook = require('./api-hooks/api-hook-routes');
 
 const db = require('./db.js');
@@ -22,6 +23,7 @@ app.use(datapaths);
 app.use(topology);
 app.use(event);
 app.use(discovery);
+app.use(provisioning);
 app.use(hook);
 
 // catch 404 and forward to error handler

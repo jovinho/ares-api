@@ -33,6 +33,7 @@ const getEventById = function(req, res) {
 };
 
 const insertEvent = function(req, res) {
+  console.log('RECIEVED EVENT', req.body);
   const dbConnection = req._rdbConn;
   const event = req.body;
 
@@ -41,10 +42,16 @@ const insertEvent = function(req, res) {
   eventPromise
     .then(function(result) {
       ApiHooksLogic.activateHooks(dbConnection, 'EVENT', event);
-      res.send(201).json(result);
+      res
+        .status(201)
+        .json(result)
+        .send();
     })
     .catch(function(err) {
-      res.send(500).json(err);
+      res
+        .status(500)
+        .json(err)
+        .send();
     });
 };
 
