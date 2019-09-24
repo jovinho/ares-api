@@ -36,15 +36,20 @@ const getEventById = function(dbConnection, datapathId) {
 
 const insertEvent = function(dbConnection, event) {
   return new Promise(function(resolve, reject) {
-    r.table('events')
-      .insert(event)
-      .run(dbConnection, function(err, result) {
-        if (err) {
-          console.log('DEU ERRO', err);
-          reject(err);
-        }
-        resolve(result);
-      });
+    r.now().run(dbConnection, function(error, now) {
+      r.table('events')
+        .insert({
+          ...event,
+          time: now
+        })
+        .run(dbConnection, function(err, result) {
+          if (err) {
+            console.log('DEU ERRO', err);
+            reject(err);
+          }
+          resolve(result);
+        });
+    });
   });
 };
 

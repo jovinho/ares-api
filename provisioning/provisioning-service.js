@@ -8,12 +8,15 @@ const isMacAddress = function(text) {
   return regex.test(text);
 };
 
-const addProvisioning = async function(body) {
+const addProvisioning = async function(source, destination) {
   try {
     const result = await axios({
       url: `${API_URL}/provisioning/add`,
       method: 'post',
-      data: body
+      data: {
+        source: source,
+        destination: destination
+      }
     });
     return result.data;
   } catch (e) {
